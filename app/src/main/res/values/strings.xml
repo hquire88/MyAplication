@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="button_initial">Locate</string>
+    <string name="title_1">B. E. L.</string>
+    <string name="title_2">Behind Enemy Line</string>
+    <string name="description">Behind Enemy Line</string>
+    <string name="url">https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection</string>
+
+</resources>
