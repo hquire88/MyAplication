@@ -10,19 +10,13 @@
     android:background="@drawable/fondometalico"
     tools:context="com.example.developer.myapplication.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Locate"
-        android:id="@+id/textViewLocate"
-        android:layout_below="@+id/buttonLocate"
-        android:layout_centerHorizontal="true" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonLocate"
-        android:background="@drawable/buttonlocate"
+        android:text="LOCATE"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@drawable/button2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

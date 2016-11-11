@@ -2,11 +2,10 @@ package com.example.developer.myapplication;
 
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,7 +17,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -29,11 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private GoogleApiClient client;
-    private Marker marker;
-    private Location mLastLocation;
     private List<BELWeaponItem> listWeapon = new ArrayList<>();
-    TextView myLocationLat;
-    TextView myLocationLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (int i= 0; i<listWeapon.size();i++)
         {
             BELWeaponItem item = listWeapon.get(i);
+            int orange = Color.rgb(255, 102, 04);
+            int lightOrange = Color.argb(50, 255, 178, 127);
 
             mMap = googleMap;
             LatLng mapEnemyPosition = new LatLng(item.getLocation().getLatitude(),item.getLocation().getLongitude());
@@ -64,7 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addCircle(new CircleOptions()
                     .center(new LatLng(item.getLocation().getLatitude(), item.getLocation().getLongitude()))
                     .radius(item.getRadiusInMeter())
-                    .strokeColor(Color.RED));
+                    .fillColor(lightOrange)
+                    .strokeColor(orange));
         }
     }
 
@@ -95,8 +92,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Mostrar Armas enemigas
     private void fetchWeaponLocation(GoogleMap googleMap)
     {
-
         WeaponParseActivity weaponParseActivity = (WeaponParseActivity) new WeaponParseActivity().execute();
+
         try {
             listWeapon = weaponParseActivity.get();
         } catch (InterruptedException e) {
@@ -105,10 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();        }
 
         this.showEnemyPosition(googleMap);
+        Toast.makeText(MapsActivity.this, "Enemigo localizado!",
+                Toast.LENGTH_SHORT).show();
     }
-
-
-
-
-
 }

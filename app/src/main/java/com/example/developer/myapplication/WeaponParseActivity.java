@@ -1,5 +1,7 @@
 package com.example.developer.myapplication;
 
+import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -29,10 +31,7 @@ public class WeaponParseActivity extends AsyncTask<Void,Void,List<BELWeaponItem>
     public void setListWeapon(List<BELWeaponItem> listWeapon) {
         this.listWeapon = listWeapon;
     }
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+
 
     @Override
     protected List<BELWeaponItem> doInBackground(Void... params) {
@@ -50,7 +49,7 @@ public class WeaponParseActivity extends AsyncTask<Void,Void,List<BELWeaponItem>
             while ((line = reader.readLine()) != null){
                 buffer.append(line);
             }
-
+            // Se obtiene el msj de la URL
             String finalJson = buffer.toString();
 
             JSONObject parentObject = new JSONObject(finalJson);
@@ -58,6 +57,7 @@ public class WeaponParseActivity extends AsyncTask<Void,Void,List<BELWeaponItem>
 
             List<BELWeaponItem> weaponItemList = new ArrayList<>();
 
+            //Se realiza el parseo de los elementos de "item"
             Gson gson = new Gson();
             for(int i=1; i<=parentArray.length(); i++) {
                 JSONObject finalObject = parentArray.getJSONObject(i-1);
@@ -94,5 +94,6 @@ public class WeaponParseActivity extends AsyncTask<Void,Void,List<BELWeaponItem>
         if(result != null) {
             listWeapon = result;
         }
+
     }
 }
